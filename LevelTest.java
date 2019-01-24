@@ -6,11 +6,19 @@ import classes.*;
 
 public class LevelTest {
     public static void main(String[] args){
+        // narrator: light cyan
+        // damage: red
+        // optionals: yellow
+
+        AnsiColor ansi = new AnsiColor();
+
         Boolean exitCheck = false;
         while(exitCheck == false){
-            System.out.println("Welcome to LevelUp.");
-            System.out.println("Enter what you want to do:");
-            System.out.println("1) Start || 2) Controls || 3) Exit");
+            // introduces user to LevelUp, clears screen
+            ansi.white("Welcome to LevelUp.", "clear");
+            // ansi.ansiColor("", "light cyan");
+            ansi.ansiColor("Enter what you want to do:", "light cyan");
+            ansi.ansiColor("1) Start || 2) Controls || 3) Exit", "white");
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
@@ -34,9 +42,12 @@ public class LevelTest {
     }
 
     private static void StartGame(){
-        System.out.println("\n");
-        System.out.println("Your story starts in the outer territory of the kingdom.");
-        System.out.println("Your past life forgotten, you must now make a new name for yourself. Speaking of which, what is your name?");
+
+        AnsiColor ansi = new AnsiColor();
+        
+        System.out.println("");
+        ansi.ansiColor("Your story starts in the outer territory of the kingdom.", "light cyan");
+        ansi.ansiColor("Your past life forgotten, you must now make a new name for yourself. Speaking of which, what is your name?", "light cyan");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -44,21 +55,21 @@ public class LevelTest {
 
         Boolean yesNo = false;
         while(yesNo == false){
-            System.out.println(user.getName() + ", is that right?");
-            System.out.println("(y/n)");
+            ansi.ansiColor(user.getName() + ", is that right?", "light cyan");
+            ansi.ansiColor("(y/n)", "yellow");
             input = scanner.nextLine();
             if(input.indexOf("y") == 0){
                 yesNo = true;
             } else {
-                System.out.println("Then What Is Your Name?");
+                ansi.ansiColor("Then What Is Your Name?", "light cyan");
                 input = scanner.nextLine();
                 user.setName(input);
             }
         }
 
-        System.out.println("Great! Your name is " + user.getName() + "You are just a simple farmer a pesant, there is nothing special about you, but you have always felt you were destanded for more.");
+        System.out.println((char)27 + "[1;36m" + "Great! Your name is " + user.getName() + "! You are just a simple farmer a pesant, there is nothing special about you, but you have always felt you were destanded for more.");
         System.out.println("Your goal is simple, become either famous or infamous. The path to glory will be hard and will take time.");
-        System.out.println("With age getting to you, you must work fast to achieve your goals.");
+        System.out.println("With age a constant threat, you must work fast to achieve your goals." + (char)27 + "[00m");
 
         Boolean gameLoop = true;
         while(gameLoop){
